@@ -14,64 +14,12 @@
 
 ## 📌 Overview
 
-This project reads customer coin data from a structured text file, calculates the **minimum number of coins** required for each currency amount using a **greedy algorithm**, allows users to **search records by name**, and exports the final results to a **CSV file**.
+This project contains **two versions** of a coin change calculator written in C. Both versions use a **greedy algorithm** to calculate the minimum number of coins needed for a given amount, and support **USD, AUD, and EUR** currencies.
 
-Built with a clean modular architecture — every concern is separated into its own `.c` / `.h` file pair.
-
----
-
-## ✨ Features
-
-| Feature | Description |
+| Version | Description |
 |---|---|
-| 🌍 Multi-Currency Support | Handles **USD**, **AUD**, and **EUR** coin denominations |
-| 🧮 Greedy Coin Algorithm | Calculates the minimum coins needed for any valid amount |
-| 📂 File-Based Input | Reads and aggregates multiple customer records from a `.txt` file |
-| 🔍 Name Search | Search and display a specific customer's full coin breakdown |
-| 📊 CSV Export | Saves all processed results to `change.csv` on exit |
-| ✅ Input Validation | Rejects invalid amounts, unsupported currencies, and malformed lines |
-| 🧱 Modular Design | Clean separation across `.c` and `.h` files |
-
----
-
-## 🗂️ Project Structure
-
-```
-coin-change-calculator/
-│
-├── main.c              # Program entry point — loads data, starts menu loop
-├── types.c / .h        # Shared data structures, currency & denomination tables
-├── file_handler.c / .h # File reading, line parsing, validation, CSV export
-├── calculator.c / .h   # Greedy coin calculation logic
-├── search.c / .h       # Name-based record lookup
-├── display.c / .h      # All console output and user input functions
-├── menu.c / .h         # Menu loop and user interaction flow
-├── validation.c / .h   # Command-line argument validation
-│
-├── coins.txt           # Sample input file
-└── README.md
-```
-
----
-
-## 📥 Input File Format
-
-The input file must begin with the **number of records**, followed by one entry per line:
-
-```
-10
-Jane 30 cents in AU$
-Joe 85 cents in EUR
-Jane 25 cents in AU$
-Bob 50 cents in US$
-Alice 40 cents in AU$
-```
-
-> **Rules:**
-> - Amounts must be between **1 and 95 cents**
-> - AUD amounts must be **divisible by 5**
-> - Supported currencies: `US$`, `AU$`, `EUR`
-> - Multiple entries for the same person are **aggregated** automatically
+| 🟠 Basic Version | Console-based, single-session calculator |
+| 🟢 Advanced Version | File-driven, multi-record system with search and CSV export |
 
 ---
 
@@ -85,20 +33,95 @@ Alice 40 cents in AU$
 
 ---
 
-## ⚙️ How to Compile & Run
+## 🗂️ Project Structure
 
-### Compile
-```bash
-gcc -o coin_program main.c menu.c search.c types.c validation.c calculator.c display.c file_handler.c
+```
+coin-change-calculator/
+│
+├── basic-version/
+│   ├── main.c              # Entry point and main loop
+│   ├── Coinfunctions.c     # Coin logic, validation, calculation, display
+│   ├── coin_functions.h    # Function declarations
+│   └── README.md           # Basic version documentation
+│
+├── advanced-version/
+│   ├── main.c              # Entry point — loads data, starts menu loop
+│   ├── types.c / .h        # Shared data structures and denomination tables
+│   ├── file_handler.c / .h # File reading, parsing, validation, CSV export
+│   ├── calculator.c / .h   # Greedy coin calculation logic
+│   ├── search.c / .h       # Name-based record lookup
+│   ├── display.c / .h      # Console output and user input
+│   ├── menu.c / .h         # Menu loop and user interaction
+│   ├── validation.c / .h   # Command-line argument validation
+│   ├── coins.txt           # Sample input file
+│   └── README.md           # Advanced version documentation
+│
+└── README.md
 ```
 
-### Run
+---
+
+## 🟠 Basic Version
+
+A simple interactive calculator where the user selects a currency, enters an amount, and gets the coin breakdown instantly.
+
+### Compile & Run
+```bash
+cd basic-version
+gcc -o calculator main.c Coinfunctions.c
+```
+```bash
+# Windows
+.\calculator.exe
+
+# macOS / Linux
+./calculator
+```
+
+### Sample Session
+```
+Select a currency:
+1 for USD
+2 for AUD
+3 for Euro
+Enter your choice: 1
+
+Enter an amount between 1 to 95: 85
+
+You need 1 coin(s) of 50 cents.
+You need 1 coin(s) of 25 cents.
+You need 1 coin(s) of 10 cents.
+
+Do you want to continue? (Y/N): N
+Program exited successfully.
+```
+
+---
+
+## 🟢 Advanced Version
+
+A file-driven system that reads multiple customer records, aggregates amounts per person, allows name-based search, and exports results to CSV.
+
+### Compile & Run
+```bash
+cd advanced-version
+gcc -o coin_program main.c menu.c search.c types.c validation.c calculator.c display.c file_handler.c
+```
 ```bash
 # Windows
 .\coin_program.exe coins.txt
 
 # macOS / Linux
 ./coin_program coins.txt
+```
+
+### Input File Format
+```
+10
+Jane 30 cents in AU$
+Joe 85 cents in EUR
+Jane 25 cents in AU$
+Bob 50 cents in US$
 ```
 
 ### Menu Options
@@ -109,29 +132,13 @@ gcc -o coin_program main.c menu.c search.c types.c validation.c calculator.c dis
 
 ---
 
-## 📤 Sample Output
+## ✅ Validation Rules
 
-**Searching for "Jane":**
-```
-Customer:
-Jane 55 cents in AU$
-Change:
-50 cents: 1
-5 cents: 1
-
-Customer:
-Jane 15 cents in US$
-Change:
-10 cents: 1
-1 cents: 5
-```
-
-**Exported CSV (`change.csv`):**
-```
-Jane, the change for 55 cents in AU$ is 1,0,1,0
-Jane, the change for 15 cents in US$ is 0,0,1,5
-Bob, the change for 50 cents in US$ is 1,0,0,0
-```
+| Rule | Details |
+|---|---|
+| Currency | Must be a supported type — USD, AUD, or EUR |
+| Amount range | Must be between 1 and 95 cents inclusive |
+| AUD rule | Amount must be divisible by 5 |
 
 ---
 
@@ -139,11 +146,11 @@ Bob, the change for 50 cents in US$ is 1,0,0,0
 
 | Concept | How It's Applied |
 |---|---|
-| Greedy Algorithm | Selects the largest coin denomination first and works downward |
+| Greedy Algorithm | Largest denomination selected first, working downward |
 | Structs & Arrays | `PersonRecord` struct stores per-currency amounts and coin counts |
-| File I/O | `fopen`, `fscanf`, `fprintf` for reading input and writing CSV |
+| File I/O | Reading from `.txt` input files, writing to `.csv` output |
 | Modular Design | Each module has a single, well-defined responsibility |
-| Input Validation | Invalid lines are skipped with descriptive error messages |
+| Input Validation | Invalid inputs are rejected with descriptive error messages |
 | String Handling | Case-insensitive name search using `strcasecmp` |
 
 ---
@@ -151,7 +158,7 @@ Bob, the change for 50 cents in US$ is 1,0,0,0
 ## 🚀 Future Improvements
 
 - [ ] Support for additional currencies (GBP, INR, JPY)
-- [ ] Dynamic denomination config via external JSON/config file
+- [ ] Dynamic denomination config via external config file
 - [ ] Sort output alphabetically by customer name
 - [ ] Unit tests for calculator and validation modules
 - [ ] Cross-platform `Makefile` for easier compilation
