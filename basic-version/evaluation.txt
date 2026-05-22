@@ -1,0 +1,93 @@
+What Works:
+- The program runs and displays currency options (USD, AUD, Euro) and prompted the user to choose one.
+- User input validation occurs and only allows entries of 1 to 3 for the currency.
+- Amount input: validated 1 and 95, checked AUD (divisible by 5).
+- Coin denominations were set correctly from user currency selected using arrays.
+- The program disconnects and uses single responsible functions, making it clear and maintainable.
+- The coin calculations were correct and used a greedy algorithm method to appropriately return the best count of coins. 
+- Only the non-zero coin results were printed and the output format was clear.
+- The program appears to loop as intended to the users input for continuing based on the continue prompt ('Y or 'y'). 
+- The code compiled and ran without any error for all intended validations for valid input cases. 
+ 
+
+What Does not work:
+- The application may not handle non-integer or unexpected inputs (e.g. letters, symbols) correctly, if any such input is entered the program could have a crash.
+- The input mechanism does not clean the input to omit trailing spaces or newline characters.
+- There is no capacity to accept floating-point values or to even have any string-validations (basic checks for input).
+- There is no recovery method (e.g. user's accidentally presses enter or types incorrect input beyond validation input).
+- The user interface is all text, there is no GUI, or use other inputs for extra visual feedback. 
+- Continue input relies only on 'Y' or 'y', it does not prompt the user once for unexpected character input.
+
+
+Software Used: Malwarebytes
+www.malwarebytes.com
+
+-Log Details-
+Scan Date: 6/22/2025
+Scan Time: 9:58 PM
+Log File: 71caef0a-4f92-11f0-9f77-a8934ac43504.json
+
+-Software Information-
+Version: 5.3.2.195
+Components Version: 134.1.5283
+Update Package Version: 1.0.100415
+License: Trial
+
+-System Information-
+OS: Windows 10 (Build 19045.2965)
+CPU: x64
+File System: NTFS
+User: DESKTOP-3MKUU2T\Admire
+
+-Scan Summary-
+Scan Type: Custom Scan
+Scan Initiated By: Manual
+Result: Completed
+Objects Scanned: 4
+Threats Detected: 0
+Threats Quarantined: 0
+Time Elapsed: 0 min, 3 sec
+
+-Scan Options-
+Memory: Disabled
+Startup: Disabled
+File system: Enabled
+Archives: Enabled
+Rootkits: Disabled
+Heuristics: Enabled
+PUP: Detect
+PUM: Detect
+
+-Scan Details-
+Process: 0
+(No malicious items detected)
+
+Module: 0
+(No malicious items detected)
+
+Registry Key: 0
+(No malicious items detected)
+
+Registry Value: 0
+(No malicious items detected)
+
+Registry Data: 0
+(No malicious items detected)
+
+Data Stream: 0
+(No malicious items detected)
+
+Folder: 0
+(No malicious items detected)
+
+File: 0
+(No malicious items detected)
+
+Physical Sector: 0
+(No malicious items detected)
+
+WMI: 0
+(No malicious items detected)
+
+
+(end)
